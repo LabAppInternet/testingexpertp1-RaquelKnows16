@@ -1,0 +1,103 @@
+###
+GET http://localhost:8080/api/users
+
+###
+GET http://localhost:8080/api/users/joanra
+
+### unexisting user
+GET http://localhost:8080/api/users/pepe
+
+###
+GET http://localhost:8080/api/stations
+
+###
+GET http://localhost:8080/api/stations/La Pobla de Segur
+
+
+### unexisting station
+GET http://localhost:8080/api/stations/La Pobla de Segur
+
+###
+GET http://localhost:8080/api/users/tina/favoriteJourneys
+
+###
+POST http://localhost:8080/api/users/joanra/favoriteJourney
+Content-Type: application/json
+
+{
+  "origin": "Lleida-Pirineus",
+  "destination": "Alcoletge",
+  "dayTimes": [
+    {"dayOfWeek" : "Monday",
+      "time" : "12:50"},
+    {"dayOfWeek" : "Tuesday",
+      "time" : "13:50"}
+  ]
+}
+
+### same origin and destination
+POST http://localhost:8080/api/users/joanra/favoriteJourney
+Content-Type: application/json
+
+{
+  "origin": "Alcoletge",
+  "destination": "Alcoletge",
+  "dayTimes": [
+    {"dayOfWeek" : "Monday",
+      "time" : "12:50"},
+    {"dayOfWeek" : "Tuesday",
+      "time" : "13:50"}
+  ]
+}
+
+### lots of errors
+POST http://localhost:8080/api/users/joanra/favoriteJourney
+Content-Type: application/json
+
+{
+  "origin": "Ll",
+  "destination": "Al",
+  "dayTimes": [
+    {"dayOfWeek" : "onday",
+      "time" : "12:0"},
+    {"dayOfWeek" : "Tuesday",
+      "time" : "a3:50"}
+  ]
+}
+
+###
+GET http://localhost:8080/api/users/tina/friends
+
+###
+GET http://localhost:8080/api/users/friends
+
+###
+POST http://localhost:8080/api/users/friends
+Content-Type: application/json
+
+{
+  "username": "joanra",
+  "friends": [
+    "manel",
+    "anna",
+    "clara"
+  ]
+}
+
+### incorrect
+POST http://localhost:8080/api/users/friends
+Content-Type: application/json
+
+{
+  "username": "Joanra",
+  "friends": []
+}
+
+### user does not exist
+POST http://localhost:8080/api/users/friends
+Content-Type: application/json
+
+{
+  "username": "xoanra",
+  "friends": ["hola"]
+}
